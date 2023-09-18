@@ -1,0 +1,19 @@
+{
+  "name": "express-application",
+  "version": "1.0.0",
+  "description": "Express-web-app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+  "start":"node index.js",
+  "dev":"nodemon index.js"
+  },
+  "author": "Abdurahmon Avezdjanov",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
