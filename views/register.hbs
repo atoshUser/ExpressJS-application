@@ -1,1 +1,48 @@
-<h2>Register page</h2>
+<div class="d-flex w-75 mx-auto flex-column gap-3 p-5">
+  <h1 class="fs-1">Register</h1>
+  <form action="/register" method="post">
+    <div class="d-flex gap-3 align-items-center mb-3">
+      <div class="form-floating w-50">
+        <input
+          type="text"
+          class="form-control"
+          name="userName"
+          id="floatingName"
+          placeholder="User"
+        />
+        <label for="floatingName">Your name</label>
+      </div>
+      <div class="form-floating w-50">
+        <input
+          type="text"
+          class="form-control"
+          name="userSurname"
+          id="floatingLastname"
+          placeholder="surname"
+        />
+        <label for="floatingLastname">Your Last name</label>
+      </div>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control"
+        name="Email"
+        id="floatingEmail"
+        placeholder="Email"
+      />
+      <label for="floatingEmail">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="password"
+        class="form-control"
+        name="Password"
+        id="floatingPassword"
+        placeholder="Password"
+      />
+      <label for="floatingPassword">Password</label>
+    </div>
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+</div>

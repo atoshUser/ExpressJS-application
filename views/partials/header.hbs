@@ -18,11 +18,19 @@
     </a>
     <div class="d-flex align-items-center gap-4">
       <nav class="d-flex align-items-center gap-4 text-dark">
-        <a
-          href="/products"
-          class="text-decoration-none text-dark fs-5"
-        >Products</a>
-        <a href="/add" class="text-decoration-none text-dark fs-5">Add</a>
+        {{#if isProduct}}
+          <a href="/products" class="text-dark fs-5">Products</a>
+        {{else}}
+          <a
+            href="/products"
+            class="text-decoration-none text-dark fs-5"
+          >Products</a>
+        {{/if}}
+        {{#if isAdd}}
+          <a href="/add" class="text-dark fs-5">Add</a>
+        {{else}}
+          <a href="/add" class="text-decoration-none text-dark fs-5">Add</a>
+        {{/if}}
       </nav>
       <div
         class="btn-group"

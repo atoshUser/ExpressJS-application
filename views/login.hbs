@@ -1,1 +1,27 @@
-<h2>Login page</h2>
+<div class="w-75 mx-auto d-flex flex-column gap-4 p-4">
+  <h1>Login</h1>
+  <form action="/login" method="post">
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control"
+        name="Email"
+        id="floatingInput"
+        placeholder="name@example.com"
+      />
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        name="Password"
+        class="form-control"
+        id="floatingPassword"
+        placeholder="Password"
+      />
+      <label for="floatingPassword">Password</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Login</button>
+  </form>
+
+</div>
