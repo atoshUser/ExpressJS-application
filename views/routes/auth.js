@@ -10,8 +10,22 @@ router.get("/register", (req, res) => {
   res.render("register", { title: "Register | Page" });
 });
 
-router.post("/login", (req, res) => {
-  console.log(req.body);
+router.post("/login", async (req, res) => {
+  const existUser = await User.findOne({ email: req.body.Email });
+  if (existUser) {
+    const isPasswordEqual = await bcrypt.compare(
+      req.body.Password,
+      existUser.password
+    );
+    if (isPasswordEqual) {
+      console.log(existUser);
+    } else {
+      console.log("Password is not correct");
+    }
+  } else {
+    console.log("User not found");
+  }
+
   res.redirect("/");
 });
 
