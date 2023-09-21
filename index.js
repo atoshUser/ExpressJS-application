@@ -3,10 +3,12 @@ import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import flash from "connect-flash";
+import cookieParser from "cookie-parser";
 import session from "express-session";
 // Routes
 import AuthRoutes from "./views/routes/auth.js";
 import ProductsRoutes from "./views/routes/product.js";
+import tokenMiddleware from "./middleware/tokenMiddleware.js";
 dotenv.config();
 const app = express();
 
@@ -23,7 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(flash());
-app.use(session({secret:'atosh',resave:false,saveUninitialized:false}))
+app.use(cookieParser());
+app.use(session({ secret: "atosh", resave: false, saveUninitialized: false }));
+app.use(tokenMiddleware);
 // routes
 app.use(AuthRoutes);
 app.use(ProductsRoutes);

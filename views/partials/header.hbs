@@ -32,7 +32,13 @@
           <a href="/add" class="text-decoration-none text-dark fs-5">Add</a>
         {{/if}}
       </nav>
-      <div
+    {{#if token}}
+     <button type="button" class="btn btn-danger"><a
+            href="/login"
+            class="text-light text-decoration-none"
+          >Log Out</a></button>
+    {{else}}
+    <div
         class="btn-group"
         role="group"
         aria-label="Basic mixed styles example"
@@ -47,5 +53,7 @@
           >Register</a></button>
       </div>
     </div>
+    {{/if}}
+      
   </div>
 </header>

@@ -33,6 +33,8 @@ router.post("/login", async (req, res) => {
     const isPasswordEqual = await bcrypt.compare(Password, existUser.password);
     if (isPasswordEqual) {
       console.log(existUser);
+      const token = generateJwtToken(existUser._id);
+      res.cookie("token", token, { httpOnly: true, secure: true });
     } else {
       req.flash("loginError", "Password is not correct");
       res.redirect("/login");
