@@ -6,11 +6,10 @@ router.get("/", (req, res) => {
 });
 
 router.get("/products", (req, res) => {
-  res.render("products", { title: "Products | Page", isProduct:true });
+  res.render("products", { title: "Products | Page", isProduct: true });
 });
 
 router.get("/add", (req, res) => {
-  res.render("add", { title: "Add | Page", isAdd:true });
+  res.render("add", { title: "Add | Page", isAdd: true });
 });
-
 export default router;

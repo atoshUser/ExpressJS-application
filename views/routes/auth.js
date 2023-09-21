@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../../models/user.js";
 import bcrypt from "bcrypt";
+import generateJwtToken from "../../services/token.js";
 const router = Router();
 router.get("/login", (req, res) => {
   res.render("login", {
@@ -47,14 +48,15 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { userName, userSurname, Email, Password } = req.body;
+  const { userName, userSurname, Password, Email } = req.body;
   if (!userSurname || !userName || !Password || !Email) {
     req.flash("registerError", "You must complete all fields!");
     res.redirect("/register");
     return;
   }
 
-  const condidate = User.findOne({ email: Email });
+  const condidate = await User.findOne({ email: req.body.Email });
+
   if (condidate) {
     req.flash("registerError", "User already exist");
     res.redirect("/register");
@@ -67,7 +69,10 @@ router.post("/register", async (req, res) => {
     email: Email,
     password: hashCode,
   };
-  await User.create(userData);
+  const user = await User.create(userData);
+  const token = generateJwtToken(user._id);
+  res.cookie("token", token, { httpOnly: true, secure: true });
+
   res.redirect("/");
 });
 
