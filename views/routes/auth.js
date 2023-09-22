@@ -4,6 +4,10 @@ import bcrypt from "bcrypt";
 import generateJwtToken from "../../services/token.js";
 const router = Router();
 router.get("/login", (req, res) => {
+  if (req.cookies.token) {
+    res.redirect("/");
+    return0;
+  }
   res.render("login", {
     title: "Login | Page",
     isLogin: true,
@@ -12,6 +16,10 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
+  if (req.cookies.token) {
+    res.redirect("/");
+    return;
+  }
   res.render("register", {
     title: "Register | Page",
     isRegister: true,
@@ -78,4 +86,8 @@ router.post("/register", async (req, res) => {
   res.redirect("/");
 });
 
+router.get("/logOut", (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/login");
+});
 export default router;
