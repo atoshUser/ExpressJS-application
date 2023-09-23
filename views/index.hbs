@@ -1,2 +1,52 @@
-<h2>Main page</h2>
-<a href="/about">Go to About</a>
+<h2 class="p-3 text-center">Main page</h2>
+{{#if data.length}}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {{#each data}}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src={{image}} alt="card-image" />
+
+          <div class="card-body">
+            <p class="card-text fs-4 fw-bold">{{title}}</p>
+            <div class="d-flex justify-content-end align-items-center">
+              {{! <div class="btn-group">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-secondary"
+                >View</button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-secondary"
+                >Edit</button>
+              </div> }}
+
+              <small
+                class="text-muted fs-4 opacity-75 text-end"
+              >{{price}}.00$</small>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group-sm" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+              >Detail</button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+              >Edit</button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+              >Delete</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <h2>Products not found</h2>
+{{/if}}

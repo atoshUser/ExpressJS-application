@@ -2,6 +2,7 @@ import { Router } from "express";
 import User from "../../models/user.js";
 import bcrypt from "bcrypt";
 import generateJwtToken from "../../services/token.js";
+
 const router = Router();
 router.get("/login", (req, res) => {
   if (req.cookies.token) {
@@ -40,7 +41,6 @@ router.post("/login", async (req, res) => {
   if (existUser) {
     const isPasswordEqual = await bcrypt.compare(Password, existUser.password);
     if (isPasswordEqual) {
-      console.log(existUser);
       const token = generateJwtToken(existUser._id);
       res.cookie("token", token, { httpOnly: true, secure: true });
     } else {

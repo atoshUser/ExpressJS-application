@@ -1,21 +1,36 @@
 import { Router } from "express";
 import Product from "../../models/product.js";
-
+import authMiddleware from "../../middleware/auth.js";
+import userMiddleware from "../../middleware/user.js";
 const router = Router();
-router.get("/", (req, res) => {
-  res.render("index", { title: "Main | Atosh" });
+router.get("/", async (req, res) => {
+  const dataBase = await Product.find().lean();
+  res.render("index", { title: "Main | Atosh", data: dataBase });
 });
 
 router.get("/products", (req, res) => {
   res.render("products", { title: "Products | Page", isProduct: true });
 });
 
-router.get("/add", (req, res) => {
-  res.render("add", { title: "Add | Page", isAdd: true });
+router.get("/add", authMiddleware, (req, res) => {
+  res.render("add", {
+    title: "Add | Page",
+    isAdd: true,
+    errProductAdd: req.flash("errProductAdd"),
+  });
 });
 
-router.post("/add-product", async (req, res) => {
-  await Product.create(req.body);
+router.post("/add-product", userMiddleware, async (req, res) => {
+  const { title, description, image, price } = req.body;
+  if (!title || !description || !image || !price) {
+    req.flash("errProductAdd", "You must complete all fields");
+    res.redirect("/add");
+    return;
+  }
+
+  await Product.create({ ...req.body, user: req.userId });
+
+  console.log(req.userId);
   res.redirect("/");
 });
 export default router;
