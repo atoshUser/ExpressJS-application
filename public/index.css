@@ -1,3 +1,24 @@
 .dark {
   background-color: crimson;
 }
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minMax(320px, 1fr));
+  grid-auto-rows: 220px;
+  gap: 20px;
+  grid-auto-flow: dense;
+  list-style: none;
+}

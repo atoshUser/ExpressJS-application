@@ -1,1 +1,27 @@
-<h2> Products page </h2>
+{{#if myProducts.length}}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 p-4">
+    {{#each myProducts}}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src={{image}} alt="card-image" />
+
+          <div class="card-body">
+            <p class="card-text fs-4 fw-bold">{{title}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="avatar bg-primary text-white fs-4">{{getFullName
+                  user.firstName
+                  user.lastName
+                }}</p>
+              <small
+                class="text-muted fs-4 opacity-75 text-end"
+              >{{price}}.00$</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <h2>Products not found</h2>
+{{/if}}

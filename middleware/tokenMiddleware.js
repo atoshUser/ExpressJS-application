@@ -4,3 +4,5 @@ export default function (req, res, next) {
   res.locals.token = isAuth;
   next();
 }
+try {
+} catch (error) {}

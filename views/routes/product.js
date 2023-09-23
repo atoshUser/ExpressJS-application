@@ -5,11 +5,22 @@ import userMiddleware from "../../middleware/user.js";
 const router = Router();
 router.get("/", async (req, res) => {
   const dataBase = await Product.find().lean();
-  res.render("index", { title: "Main | Atosh", data: dataBase });
+  res.render("index", {
+    title: "Main | Atosh",
+    data: dataBase.reverse(),
+    userId: req.userId ? req.userId.toString() : null,
+  });
 });
 
-router.get("/products", (req, res) => {
-  res.render("products", { title: "Products | Page", isProduct: true });
+router.get("/products", async (req, res) => {
+  const user = req.userId ? req.userId.toString() : null;
+  const myProducts = await Product.find({ user }).populate("user").lean();
+ 
+  res.render("products", {
+    title: "Products | Page",
+    isProduct: true,
+    myProducts,
+  });
 });
 
 router.get("/add", authMiddleware, (req, res) => {

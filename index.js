@@ -9,12 +9,15 @@ import session from "express-session";
 import AuthRoutes from "./views/routes/auth.js";
 import ProductsRoutes from "./views/routes/product.js";
 import tokenMiddleware from "./middleware/tokenMiddleware.js";
+import hbsHelper from "./utils/index.js";
+import user from "./middleware/user.js";
 dotenv.config();
 const app = express();
 
 const hbs = create({
   defaultLayout: "main",
   extname: "hbs",
+  helpers: hbsHelper,
 });
 
 app.engine("hbs", hbs.engine);
@@ -27,6 +30,8 @@ app.use(express.json());
 app.use(flash());
 app.use(cookieParser());
 app.use(session({ secret: "atosh", resave: false, saveUninitialized: false }));
+// Middleware
+app.use(user);
 app.use(tokenMiddleware);
 // routes
 app.use(AuthRoutes);
